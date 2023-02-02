@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c50f63d7-075e-403c-80e4-8f0e7bc627a1" name="Changes" comment="git ignore added try v2">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/petStore/AbstractTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/petStore/apis/GetPet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/petStore/apis/PostPet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/petStore/models/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/petStore/models/Empty.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/petStore/models/ModelApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/petStore/models/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/petStore/models/Pet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/petStore/models/Tag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/petStore/models/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/petStore/TestBaseClassBack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/petStore/apis/GetPetTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2L5rM6uV9coY4OkO0gtyhzBsPNo" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/Laser/Documents/Projects/MainProject/src/main/java/TestModels/test"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Laser\Documents\Projects\MainProject\src\main\java\TestModels\test" />
+      <recent name="C:\Users\Laser\Documents\Projects\MainProject\src\main\java\TestModels" />
+      <recent name="C:\Users\Laser\Documents\Projects\MainProject\src\main\java\TestModels\petStoreApi" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Laser\Documents\Projects\MainProject\src\main\java\TestModels\httpbinApi" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="TestModels.httpbinApi" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="petStore" />
+      <recent name="petStore.apis" />
+    </key>
+  </component>
+  <component name="RunManager" selected="TestNG.GetPetTests.getPetById">
+    <configuration name="GetPetTests.getPetById" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="MainProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="petStore.apis.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="petStore.apis" />
+      <option name="MAIN_CLASS_NAME" value="petStore.apis.GetPetTests" />
+      <option name="METHOD_NAME" value="getPetById" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="petStore" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="MainProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="petStore.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="petStore" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="TestNG.GetPetTests.getPetById" />
+        <item itemvalue="TestNG.petStore" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c50f63d7-075e-403c-80e4-8f0e7bc627a1" name="Changes" comment="" />
+      <created>1675171735525</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675171735525</updated>
+    </task>
+    <task id="LOCAL-00001" summary="git ignore added">
+      <created>1675349745011</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1675349745011</updated>
+    </task>
+    <task id="LOCAL-00002" summary="git ignore added try v2">
+      <created>1675349964461</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1675349964461</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="git ignore added" />
+    <MESSAGE value="git ignore added try v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="git ignore added try v2" />
+  </component>
+</project>
