@@ -12,7 +12,7 @@ target/
 *.iml
 *.ipr
 .idea/encodings.xml
-.idea/**.xml
+.idea/*.xml
 
 ### Eclipse ###
 .apt_generated
