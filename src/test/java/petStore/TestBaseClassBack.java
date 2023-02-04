@@ -147,8 +147,11 @@ public class TestBaseClassBack {
 
 
 
-        //Tworze config do RestAssured z wykorzystaniem objectMapperCofiga jacksona20objectmappeetFacfory z wyrazeniem lambda przekladajacyjm cls,charste na objcetmapper zadakerarowany wczesniej
-        RestAssuredConfig config = RestAssuredConfig.config().objectMapperConfig(ObjectMapperConfig.objectMapperConfig().jackson2ObjectMapperFactory((cls,charset)->objectMapper));
+        //  Tworzę config do RestAssured z wykorzystaniem objectMapperConfig,jackson2ObjectMapperFactory z
+        //      wyrażeniem lambda przekładającym cls,charset na objectMapper zadaklarowanym wcześniej
+
+        RestAssuredConfig config = RestAssuredConfig.config().objectMapperConfig(ObjectMapperConfig.objectMapperConfig()
+                                    .jackson2ObjectMapperFactory((cls,charset)->objectMapper));
 
         String className = this.getClass().getSimpleName();
 
