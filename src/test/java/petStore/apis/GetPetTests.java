@@ -14,4 +14,13 @@ public class GetPetTests extends TestBaseClassBack {
         paramsMap.put("id","2");
         getResponseGetPathParamsTest(getPet,"",paramsMap);
     }
+
+    @Test
+    public void getPetByStatus(){
+        GetPetByStatus getPetByStatus = new GetPetByStatus();
+        Map<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("status","pending");
+        getResponseGetPathParamsTest(getPetByStatus,"",paramsMap);
+
+    }
 }
