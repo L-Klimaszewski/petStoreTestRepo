@@ -2,17 +2,17 @@ package petStore.apis;
 
 import petStore.AbstractTest;
 import petStore.models.Empty;
-import petStore.models.Pet;
+import petStore.models.Error;
 
-public class GetPetByStatus implements AbstractTest<Empty, Pet,Empty> {
+public class GetPet4Errors implements AbstractTest<Empty,Error,Empty> {
 
     private String url;
     private Empty request;
-    private Pet response;
+    private Error response;
 
-    public GetPetByStatus() {
+    public GetPet4Errors() {
         this.request = new Empty();
-        this.url = "https://petstore.swagger.io/v2/pet/findByStatus?status={status}";
+        this.url = "https://petstore.swagger.io/v2/pet/{id}";
     }
 
     public Empty getRequestBody() {
@@ -33,21 +33,21 @@ public class GetPetByStatus implements AbstractTest<Empty, Pet,Empty> {
     }
 
 
-    private void setResponse(Pet response) {
+    private void setResponse(Error response) {
         this.response = response;
     }
 
     public void setResponse(Object response) {
-        setResponse((Pet) response);
+        setResponse((Error) response);
     }
 
-    public Pet getResponseBody() {
+    public Error getResponseBody() {
         return response;
     }
 
-    public Class<Pet> getResponseClass() {
-        return Pet.class;
+    public Class<Error> getResponseClass() {
+        return Error.class;
     }
-
+    
 
 }
