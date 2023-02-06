@@ -9,25 +9,25 @@ import java.util.Map;
 
 public class GetPetTests extends TestBaseClassBack {
     @Test
-    public void getPetById(){
+    public void getPetById() {
         // Tworzę nowe obiekty klas GetPet,HashMap oraz SoftAssertions i przypisuję je do odpowienich zmiennych
         GetPet getPet = new GetPet();
         Map<String, String> paramsMap = new HashMap<>();
         SoftAssertions softly = new SoftAssertions();
 
         // Do zmiennej paramsMap dodaję parametry w postaci String, które następnie przekazuję jako argumenty do podanej poniżej metody
-        paramsMap.put("id","7");
-        getResponseGetPathParamsTest(getPet,"",paramsMap);
+        paramsMap.put("id", "999");
+        getResponseGetPathParamsTest(getPet, "", paramsMap);
 
         // Dodaje asercje do danych uzyskanych w odpowiedzi z Api
-        softly.assertThat(getPet.getResponseBody().getName()).isEqualTo("");
-        softly.assertThat(getPet.getResponseBody().getId()).isEqualTo(7);
+        softly.assertThat(getPet.getResponseBody().getName()).isEqualTo("Frand");
+        softly.assertThat(getPet.getResponseBody().getId()).isEqualTo(999);
         softly.assertAll();
 
     }
 
     @Test
-    public void checkStatusCodeAndErrorResponseWhenShortCutPowerSignProvided(){
+    public void checkStatusCodeAndErrorResponseWhenShortCutPowerSignProvided() {
 
         GetPet4Errors getPet4Errors = new GetPet4Errors();
         Map<String, String> paramsMap = new HashMap<>();

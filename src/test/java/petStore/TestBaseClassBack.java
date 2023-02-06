@@ -84,11 +84,27 @@ public class TestBaseClassBack {
                 .when()
                 .header("Connection", "keep-alive")
                 .accept("application/json")
+                .contentType("application/json")
                 .body(test.getRequestBody())
                 .post(test.getUrl())
                 .then()
                 .log().all()
                 .assertThat().statusCode(200)
+                .extract().response().as(test.getResponseClass());
+        test.setResponse(response);
+
+    }
+    public void getResponsePostSuccessTestWithoutContent(AbstractTest<?, ?, ?> test) {
+
+        Object response = given()
+                .log().all()
+                .when()
+                .header("Connection", "keep-alive")
+                .accept("application/json")
+                .body(test.getRequestBody())
+                .post(test.getUrl())
+                .then()
+                .log().all()
                 .extract().response().as(test.getResponseClass());
         test.setResponse(response);
 
