@@ -18,16 +18,16 @@ public class PutPetTests extends TestBaseClassBackEnd {
 
         // Wprowadzam parametry do zapytania
         putPet.getRequestBody().setId(123124L);
-        putPet.getRequestBody().setName("Johny");
+        putPet.getRequestBody().setName("B Good");
         putPet.getRequestBody().setCategory(category);
         assert putPet.getRequestBody().getCategory() != null;
-        putPet.getRequestBody().getCategory().setName("B Good");
+        putPet.getRequestBody().getCategory().setName("Johny");
         putPet.getRequestBody().setStatus(Pet.StatusEnum.SOLD);
 
         // Wywołuję metodę z TestBaseClass do wysłania zapytania do API
        getResponsePutSuccessTest(putPet);
 
-        // Dodaję asercje do potwierdzenia powodzenia dodania rekordu
+        // Dodaję asercje do potwierdzenia powodzenia aktualizacji rekordu
         softly.assertThat(putPet.getResponseBody().getId()).isEqualTo(123124L);
         softly.assertAll();
     }
