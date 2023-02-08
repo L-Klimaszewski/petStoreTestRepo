@@ -19,7 +19,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class TestBaseClassBack {
+public class TestBaseClassBackEnd {
 
     public RequestSpecification specReqLogger;
 
@@ -94,6 +94,23 @@ public class TestBaseClassBack {
         test.setResponse(response);
 
     }
+    public void getResponsePostError400(AbstractTest<?, ?, ?> test) {
+
+        Object response = given()
+                .log().all()
+                .when()
+                .header("Connection", "keep-alive")
+                .accept("application/json")
+                .contentType("application/json")
+                .body(test.getRequestBody())
+                .post(test.getUrl())
+                .then()
+                .log().all()
+                .assertThat().statusCode(400)
+                .extract().response().as(test.getResponseClass());
+        test.setResponse(response);
+
+    }
     public void getResponsePostSuccessTestWithoutContent(AbstractTest<?, ?, ?> test) {
 
         Object response = given()
@@ -110,14 +127,14 @@ public class TestBaseClassBack {
 
     }
 
-    public void getResponsePutSuccessTest(AbstractTest<?, ?, ?> test, Map<String, ?> paramsMap) {
+    public void getResponsePutSuccessTest(AbstractTest<?, ?, ?> test) {
 
         Object response = given()
                 .log().all()
-                .pathParams(paramsMap)
                 .when()
                 .header("Connection", "keep-alive")
                 .accept("application/json")
+                .contentType("application/json")
                 .body(test.getRequestBody())
                 .put(test.getUrl())
                 .then()

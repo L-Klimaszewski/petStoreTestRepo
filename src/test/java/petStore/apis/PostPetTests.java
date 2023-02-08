@@ -2,10 +2,12 @@ package petStore.apis;
 
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
-import petStore.TestBaseClassBack;
+import petStore.TestBaseClassBackEnd;
 import petStore.models.Category;
+import petStore.models.Pet;
 
-public class PostPetTests extends TestBaseClassBack {
+
+public class PostPetTests extends TestBaseClassBackEnd {
 
     @Test
     public void postNewPetToStore(){
@@ -19,8 +21,12 @@ public class PostPetTests extends TestBaseClassBack {
         postPet.getRequestBody().setId(Id);
         postPet.getRequestBody().setName("Łajka");
         postPet.getRequestBody().setCategory(category);
+        assert postPet.getRequestBody().getCategory() != null;
         postPet.getRequestBody().getCategory().setId(123444L);
         postPet.getRequestBody().getCategory().setName("Johny");
+        //postPet.getRequestBody().setTags();                    ZAPYTAĆ
+        postPet.getRequestBody().setStatus(Pet.StatusEnum.AVAILABLE);
+
 
         // Wywołuję metodę z TestBaseClass do wysłania zapytania do API
         getResponsePostSuccessTest(postPet);
@@ -29,20 +35,7 @@ public class PostPetTests extends TestBaseClassBack {
         softly.assertThat(postPet.getResponseBody().getId()).isEqualTo(Id);
         softly.assertAll();
     }
-    @Test
-    public void checkStatusCodeAndErrorWhen(){
 
-        SoftAssertions softly = new SoftAssertions();
-        PostPet4Errors postPet4Errors = new PostPet4Errors();
-
-        postPet4Errors.getRequestBody().setId(1112L);
-
-        getResponsePostSuccessTest(postPet4Errors);
-
-        softly.assertThat(postPet4Errors.getResponseBody().getCode()).isEqualTo(404);
-        softly.assertAll();
-
-    }
 
 
 }

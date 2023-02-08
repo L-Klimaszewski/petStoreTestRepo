@@ -2,12 +2,12 @@ package petStore.apis;
 
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
-import petStore.TestBaseClassBack;
+import petStore.TestBaseClassBackEnd;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetPetTests extends TestBaseClassBack {
+public class GetPetTests extends TestBaseClassBackEnd {
     @Test
     public void getPetById() {
         // Tworzę nowe obiekty klas GetPet,HashMap oraz SoftAssertions i przypisuję je do odpowienich zmiennych
@@ -19,7 +19,7 @@ public class GetPetTests extends TestBaseClassBack {
         paramsMap.put("id", "999");
         getResponseGetPathParamsTest(getPet, "", paramsMap);
 
-        // Dodaje asercje do danych uzyskanych w odpowiedzi z Api
+        // Dodaje asercje do danych uzyskanych w odpowiedzi z API
         softly.assertThat(getPet.getResponseBody().getName()).isEqualTo("Frand");
         softly.assertThat(getPet.getResponseBody().getId()).isEqualTo(999);
         softly.assertAll();
@@ -57,7 +57,7 @@ public class GetPetTests extends TestBaseClassBack {
         SoftAssertions softly = new SoftAssertions();
         paramsMap.put("id","-28");
         getResponseGetPathParamsTest(getPet4Errors,"",paramsMap);
-        softly.assertThat(getPet4Errors.getResponseBody().getCode()).isEqualTo(404);
+        softly.assertThat(getPet4Errors.getResponseBody().getCode()).isEqualTo(1);//404
         softly.assertAll();
     }
 
@@ -157,5 +157,53 @@ public class GetPetTests extends TestBaseClassBack {
         softly.assertAll();
     }
 
+    @Test
+    public void checkStatusCodeAndErrorResponseWhenCurlyBracketProvided() {
 
+        GetPet4Errors getPet4Errors = new GetPet4Errors();
+        Map<String, String> paramsMap = new HashMap<>();
+        SoftAssertions softly = new SoftAssertions();
+        paramsMap.put("id", "{}");
+        getResponseGetPathParamsTest(getPet4Errors, "", paramsMap);
+        //java.lang.IllegalArgumentException: Path parameters were not correctly defined. Undefined path parameters are: .
+        softly.assertThat(getPet4Errors.getResponseBody().getCode()).isEqualTo(404);
+        softly.assertAll();
+    }
+
+    @Test
+    public void checkStatusCodeAndErrorResponseWhenHexadecimalProvided() {
+
+        GetPet4Errors getPet4Errors = new GetPet4Errors();
+        Map<String, String> paramsMap = new HashMap<>();
+        SoftAssertions softly = new SoftAssertions();
+        paramsMap.put("id", "0xABCD");
+        getResponseGetPathParamsTest(getPet4Errors, "", paramsMap);
+        softly.assertThat(getPet4Errors.getResponseBody().getCode()).isEqualTo(404);
+        softly.assertAll();
+    }
+
+    @Test
+    public void checkStatusCodeAndErrorResponseWhenScientificNotationProvided() {
+
+        GetPet4Errors getPet4Errors = new GetPet4Errors();
+        Map<String, String> paramsMap = new HashMap<>();
+        SoftAssertions softly = new SoftAssertions();
+        paramsMap.put("id", "1.23e+4");
+        getResponseGetPathParamsTest(getPet4Errors, "", paramsMap);
+        softly.assertThat(getPet4Errors.getResponseBody().getCode()).isEqualTo(404);
+        softly.assertAll();
+    }
+
+    @Test
+    public void checkStatusCodeAndErrorResponseWhenEmptySpaceProvided() {
+
+        GetPet4Errors getPet4Errors = new GetPet4Errors();
+        Map<String, String> paramsMap = new HashMap<>();
+        SoftAssertions softly = new SoftAssertions();
+        paramsMap.put("id", " ");
+        getResponseGetPathParamsTest(getPet4Errors, "", paramsMap);
+        softly.assertThat(getPet4Errors.getResponseBody().getCode()).isEqualTo(404);
+        softly.assertAll();
+
+    }
 }

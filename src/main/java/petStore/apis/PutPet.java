@@ -1,29 +1,29 @@
 package petStore.apis;
 
 import petStore.AbstractTest;
-import petStore.models.Order;
 import petStore.models.Pet;
 
-public class PostOrder implements AbstractTest<Order, Pet,Order> {
+
+public class PutPet implements AbstractTest<Pet,Pet,Pet> {
 
     private String url;
-    private Order request;
+    private Pet request;
     private Pet response;
 
-    public PostOrder() {
-        this.request = new Order();
+    public PutPet() {
+        this.request = new Pet();
         this.url = "https://petstore.swagger.io/v2/pet";
     }
 
-    public Order getRequestBody() {
+    public Pet getRequestBody() {
         return request;
     }
 
-    public Order getRequest() {
+    public Pet getRequest() {
         return request;
     }
 
-    public void setRequest(Order request) {
+    public void setRequest(Pet request) {
         this.request = request;
     }
 
