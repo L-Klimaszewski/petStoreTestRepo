@@ -151,17 +151,17 @@ public class TestBaseClassBackEnd {
                 .when()
                 .header("Connection", "keep-alive")
                 .accept("application/json")
+                .contentType("application/json")
                 .body(test.getRequestBody())
                 .delete(test.getUrl())
                 .then()
                 .log().all()
+                .assertThat().statusCode(200)
                 .extract().response().as(test.getResponseClass());
         test.setResponse(response);
 
 
     }
-
-
 
 
     @BeforeSuite
