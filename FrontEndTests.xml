@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="FrontEndTests">
+    <test verbose="2" preserve-order="true" name="FrontEndTests">
+        <packages>
+            <package name="nazwaApkiFrontEnd.frontEnd"></package>
+        </packages>
+    </test>
+</suite>

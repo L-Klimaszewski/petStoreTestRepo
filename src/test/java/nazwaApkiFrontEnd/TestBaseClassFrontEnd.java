@@ -1,4 +1,4 @@
-package petStore;
+package nazwaApkiFrontEnd;
 
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -14,12 +14,13 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import petStore.AbstractTest;
 
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class TestBaseClassBackEnd {
+public class TestBaseClassFrontEnd {
 
     public RequestSpecification specReqLogger;
 
@@ -143,7 +144,7 @@ public class TestBaseClassBackEnd {
         test.setResponse(response);
     }
 
-    public void getResponseDeleteSuccessTest(AbstractTest<?, ?, ?> test, Map<String, ?> paramsMap) {
+    public void getResponseDeleteTest(AbstractTest<?, ?, ?> test, Map<String, ?> paramsMap,Integer statusCode) {
 
         Object response = given()
                 .log().all()
@@ -156,7 +157,7 @@ public class TestBaseClassBackEnd {
                 .delete(test.getUrl())
                 .then()
                 .log().all()
-                .assertThat().statusCode(200)
+                .assertThat().statusCode(statusCode)
                 .extract().response().as(test.getResponseClass());
         test.setResponse(response);
 

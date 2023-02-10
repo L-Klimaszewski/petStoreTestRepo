@@ -2,12 +2,12 @@ package petStore.apis;
 
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
-import petStore.TestBaseClassBackEnd;
+import petStore.TestBaseClassAPI;
 import petStore.models.Category;
 import petStore.models.Pet;
 
 
-public class PutPetTests extends TestBaseClassBackEnd {
+public class PutPetTests extends TestBaseClassAPI {
 
     @Test
     public void updatingOldRecordWithNewData(){
@@ -24,7 +24,7 @@ public class PutPetTests extends TestBaseClassBackEnd {
         putPet.getRequestBody().getCategory().setName("Johny");
         putPet.getRequestBody().setStatus(Pet.StatusEnum.SOLD);
 
-        // Wywołuję metodę z TestBaseClass do wysłania zapytania do API
+        // Wywołuję metodę z TestBaseClassFrontEnd do wysłania zapytania do API
        getResponsePutSuccessTest(putPet);
 
         // Dodaję asercje do potwierdzenia powodzenia aktualizacji rekordu

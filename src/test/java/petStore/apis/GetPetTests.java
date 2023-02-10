@@ -2,12 +2,12 @@ package petStore.apis;
 
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
-import petStore.TestBaseClassBackEnd;
+import petStore.TestBaseClassAPI;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetPetTests extends TestBaseClassBackEnd {
+public class GetPetTests extends TestBaseClassAPI {
     @Test
     public void getPetById() {
         // Tworzę nowe obiekty klas GetPet,HashMap oraz SoftAssertions i przypisuję je do odpowienich zmiennych
@@ -51,13 +51,14 @@ public class GetPetTests extends TestBaseClassBackEnd {
     }
     @Test
     public void checkStatusCodeAndErrorResponseWhenNegativeIntegerProvided(){
-            /// SPRAWDZIC JAK BEDZIE DOBRY INTERNET
+
         GetPet4Errors getPet4Errors = new GetPet4Errors();
         Map<String, String> paramsMap = new HashMap<>();
         SoftAssertions softly = new SoftAssertions();
         paramsMap.put("id","-28");
         getResponseGetPathParamsTest(getPet4Errors,"",paramsMap);
         softly.assertThat(getPet4Errors.getResponseBody().getCode()).isEqualTo(1);//404
+        //asercja na wszystko co zwraca error
         softly.assertAll();
     }
 
