@@ -29,7 +29,9 @@ public class DeletePetTests extends TestBaseClassAPI {
         DeletePet deletePet = new DeletePet();
 
         /* Tworzę nowy obiekt klasy "SoftAssertions", którego metod użyję do potwierdzenia zgodności otrzymanych
-          danych z oczekiwanymi. */
+          danych z oczekiwanymi. Dzięki tzw. miekkim asercjom kod nie zostanie zatrzymany w momencie złamania asercji.
+          Daje to możliwość sprawdzenia kilku warunków jednocześnie. Dopiero po wywołaniu metody "assertAll", program
+          sprawdzi wszystkie asercje i zakończy działanie z błędem jeśli jakaś asercja zostanie złamana.*/
 
         SoftAssertions softly = new SoftAssertions();
 
@@ -63,7 +65,7 @@ public class DeletePetTests extends TestBaseClassAPI {
         /* Ustawiam właściwości wcześniej utworzonego obiektu typu "postPet" przy pomocy metod zawartych w klasie "PostPet".
           Do tego testu wykorzystuję wybranych metod, tj. "setId","setName", "setStatus". Dodatkowo przy użyciu metod
           "setCategory" i "setTags" przekazuję wcześniej utworzone i zdefiniowane obiekty "tagList" oraz "category". Tak
-          zdefiniowany obiekt "postPet" przekazuję jako argument w metodzie "getResponsePostSuccess", której zadaniem
+          zdefiniowany obiekt "postPet" przekazuję jako argument w metodzie "getResponsePost", której zadaniem
           jest wysłanie żądania do API o utworzenie pozycji o właściowściach zdefiniowanych w obiekcie "postPet". */
 
         postPet.getRequestBody().setId(Long.parseLong(id));
@@ -71,7 +73,7 @@ public class DeletePetTests extends TestBaseClassAPI {
         postPet.getRequestBody().setTags(tagList);
         postPet.getRequestBody().setCategory(category);
         postPet.getRequestBody().setStatus(Pet.StatusEnum.AVAILABLE);
-        getResponsePostSuccess(postPet);
+        getResponsePost(postPet);
 
         /* Metody "getResponseDelete" używam do wysłania żądania do API o usunięcie konkretnej pozycji. Obiekt "deletePet",
           który służy do opakowania informacji potrzebnych do wykonania żądania "DELETE" jest pierwszym argumentem tej metody.
@@ -83,7 +85,7 @@ public class DeletePetTests extends TestBaseClassAPI {
         /* Używam metod zawartych w klasie "DeletePet" na obiekcie deletePet do uzyskania dostępu do danych zawartych w
           "body" odpowiedzi z API. Dzięki metodom "getCode", "getType" i "getMessage" pobieram dane z "body" odpowiedzi.
           Nastepnie przy pomocy metody "isEqual" klasy "SoftAssertions" weryfikuję czy otrzymane dane są zgodne z tymi,
-          których oczekiwałem. */
+          których oczekiwałem. Na koniec wywołuję metodę "assertAll" aby sprawdzić czy asercje zostały złamane. */
 
         softly.assertThat(deletePet.getResponseBody().getCode()).isEqualTo(200);
         softly.assertThat(deletePet.getResponseBody().getType()).isEqualTo("unknown");
