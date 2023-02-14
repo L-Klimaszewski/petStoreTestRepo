@@ -154,6 +154,8 @@ public class TestBaseClassAPI {
     @AfterMethod
     public void afterMethod(ITestResult result) {
 
+        // Sprawdzam status testu i wyświetlam jego wynik na konsoli
+
         try {
             if (result.getStatus() == ITestResult.SUCCESS) {
                 System.out.println("Test Succeed");
