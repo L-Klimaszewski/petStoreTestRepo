@@ -1,11 +1,17 @@
 package otoMoto.pl;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 
 public class TestBaseClassFrontEnd {
+
+    public WebDriver driver;
 
 
     @BeforeSuite
@@ -36,6 +42,10 @@ public class TestBaseClassFrontEnd {
 
         System.out.println("Method name: " + result.getMethod().getMethodName());
 
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        PageFactory.initElements(driver, this);
+
     }
 
 
@@ -56,6 +66,7 @@ public class TestBaseClassFrontEnd {
             e.printStackTrace();
         }
 
+        //driver.quit();
     }
 
     @AfterClass
