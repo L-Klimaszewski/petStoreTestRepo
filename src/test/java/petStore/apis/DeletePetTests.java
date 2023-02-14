@@ -94,4 +94,64 @@ public class DeletePetTests extends TestBaseClassAPI {
 
     }
 
-}
+
+    @Test
+    public void checkStatusCodeAndErrorResponseWhenShortCutPowerProvided() {
+
+        PostPet postPet = new PostPet();
+        DeletePet deletePet = new DeletePet();
+        SoftAssertions softly = new SoftAssertions();
+        Map<String,String> paramsMap = new HashMap<>();
+        String id = "25p5";
+
+        try {
+            postPet.getRequestBody().setId(Long.valueOf(id));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        postPet.getRequestBody().setName("Łajka");
+        getResponsePost(postPet);
+
+        paramsMap.put("id",id);
+
+        getResponseDelete(deletePet,paramsMap,404);
+
+        softly.assertThat(deletePet.getResponseBody().getCode()).isEqualTo(404);
+        softly.assertThat(deletePet.getResponseBody().getType()).isEqualTo("unknown");
+        softly.assertThat(deletePet.getResponseBody().getMessage()).isEqualTo("java.lang.NumberFormatException: For input string: \"25p5\"");
+        softly.assertAll();
+    }
+
+    @Test
+    public void checkStatusCodeAndErrorResponseWhenStringIdProvided() {
+
+        PostPet postPet = new PostPet();
+        DeletePet deletePet = new DeletePet();
+        SoftAssertions softly = new SoftAssertions();
+        Map<String,String> paramsMap = new HashMap<>();
+        String id = "abc";
+
+        try {
+            postPet.getRequestBody().setId(Long.valueOf(id));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        postPet.getRequestBody().setName("Łajka");
+        getResponsePost(postPet);
+
+        paramsMap.put("id",id);
+
+        getResponseDelete(deletePet,paramsMap,404);
+
+        softly.assertThat(deletePet.getResponseBody().getCode()).isEqualTo(404);
+        softly.assertThat(deletePet.getResponseBody().getType()).isEqualTo("unknown");
+        softly.assertThat(deletePet.getResponseBody().getMessage()).isEqualTo("java.lang.NumberFormatException: For input string: \"abc\"");
+        softly.assertAll();
+    }
+
+
+    }
+
+
