@@ -21,8 +21,10 @@ import static io.restassured.RestAssured.given;
 
 public class TestBaseClassAPI {
 
+    // Deklaruję nowy obiekt typu "RequestSpecification".
     public RequestSpecification specReqLogger;
 
+    // Korzystam z metod do wykonania żądań HTTP z biblioteki Rest-Assured.
 
     public void getResponseGetPathParamsTest(AbstractTest<?, ?, ?> test, String authToken, Map<String, ?> paramsMap) {
         Object response = given()
@@ -41,7 +43,7 @@ public class TestBaseClassAPI {
         test.setResponse(response);
     }
 
-    public void getResponsePostSuccessTest(AbstractTest<?, ?, ?> test) {
+    public void getResponsePost(AbstractTest<?, ?, ?> test) {
 
         Object response = given()
                 .log().all()
@@ -58,7 +60,7 @@ public class TestBaseClassAPI {
         test.setResponse(response);
     }
 
-    public void getResponsePutSuccessTest(AbstractTest<?, ?, ?> test) {
+    public void getResponsePut(AbstractTest<?, ?, ?> test) {
 
         Object response = given()
                 .log().all()
@@ -74,7 +76,7 @@ public class TestBaseClassAPI {
         test.setResponse(response);
     }
 
-    public void getResponseDeleteTest(AbstractTest<?, ?, ?> test, Map<String, ?> paramsMap,Integer statusCode) {
+    public void getResponseDelete(AbstractTest<?, ?, ?> test, Map<String, ?> paramsMap,Integer statusCode) {
 
         Object response = given()
                 .log().all()
@@ -96,29 +98,41 @@ public class TestBaseClassAPI {
 
     @BeforeSuite
     public static void getSuiteName(ITestContext context) {
+
+        // Przy pomocy obiektu ITestContext pobieram nazwę bierzącego profilu i wyświetlam ją w konsoli.
+
         System.out.println("Suite name: " + context.getCurrentXmlTest().getSuite().getName());
     }
 
     @BeforeClass
     public void beforeClass() {
 
+        /* Inicjuję obiekt klasy "ObjectMapper" dzięki, któremu będę mógł mapować obiekty Java na format
+          JSON i odwrotnie. Nastepnie rejestruję dwa nowe moduły odpowiedzialne za obsługę typów związanymi
+          z datami i czasem. Ustawiam także widoczność getterów na NONE tak aby Jackson z nich nie korzystał
+          podczas serializacji obiektów. Na koniec ustawiam aby Jackson nie zwracał błędów podczas serializacji
+          pustych obiektów. */
+
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new Jdk8Module()).registerModule(new JavaTimeModule());
         objectMapper.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE);
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS,false);
 
-
-
-
-        //  Tworzę config do RestAssured z wykorzystaniem objectMapperConfig,jackson2ObjectMapperFactory z
-        //      wyrażeniem lambda przekładającym cls,charset na objectMapper zadaklarowanym wcześniej
+        /* Tworzę config do RestAssured z wykorzystaniem objectMapperConfig,jackson2ObjectMapperFactory z
+          wyrażeniem lambda przekładającym cls,charset na objectMapper zadaklarowanym wcześniej. */
 
         RestAssuredConfig config = RestAssuredConfig.config().objectMapperConfig(ObjectMapperConfig.objectMapperConfig()
                                     .jackson2ObjectMapperFactory((cls,charset)->objectMapper));
 
-        String className = this.getClass().getSimpleName();
+        /* Powołuję nowy obiekt typu String i przypisuję do niego nazwę klasy dla której ten kod jest
+          wykonywany. Następnie wynik tej operacji jest wypisywany w konsoli przy użyciu metody "println". */
 
+        String className = this.getClass().getSimpleName();
         System.out.println("Class name: " + className);
+
+        /* Wcześniej utworzony config przekazuję za pomocą metody "setConfig", a następnie wywołuję metodę "build",
+          która zwraca gotowy obiekt specReqLogger. Obiekt ten zawiera informacje, które można wykorzystać do
+          wysyłania zapytań REST.   */
 
         specReqLogger = new RequestSpecBuilder()
                 .setConfig(config)
@@ -129,6 +143,9 @@ public class TestBaseClassAPI {
 
     @BeforeMethod
     public void beforeMethod(ITestResult result) {
+
+        // Wyświetlam nazwę metody na konsoli
+
         System.out.println("Method name: " + result.getMethod().getMethodName());
 
     }
@@ -153,11 +170,17 @@ public class TestBaseClassAPI {
 
     @AfterClass
     public void afterClass() {
+
+        // Wyświetlam informację o końcu danej klasy.
+
         System.out.println("End of class");
     }
 
     @AfterSuite
     public void afterSuite() {
+
+        // Wyświetlam informację o końcu danego profilu testowego.
+
         System.out.println("End of suite");
     }
 
