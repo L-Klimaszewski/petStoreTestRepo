@@ -3,7 +3,7 @@
 <suite name="FrontEndTests">
     <test verbose="2" preserve-order="true" name="FrontEndTests">
         <packages>
-            <package name="nazwaApkiFrontEnd.frontEnd"></package>
+            <package name="otoMoto.pl.frontEnd"></package>
         </packages>
     </test>
 </suite>
