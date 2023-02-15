@@ -15,7 +15,7 @@ public class MainPageTests extends TestBaseClassFrontEnd {
     @FindBy (xpath = "//*[@id='filter_float_price:to']/div")
     private WebElement chooseMaxPrice;
 
-    @FindBy (xpath = "//*[@id='filter_float_price:to']/ul/li[12]/div/div")
+    @FindBy (xpath = "//*[@id='filter_float_price:to']/ul/li[12]/div/div/div/div")
     private WebElement chooseMaximumPrice;
 
 
