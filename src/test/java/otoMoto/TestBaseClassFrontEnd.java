@@ -12,11 +12,15 @@ import org.testng.annotations.*;
 
 public class TestBaseClassFrontEnd {
 
+    /* Tworzę zmienną 'driver' typu "WebDriver" z modyfikatorem public, tak aby 'driver' był dostępny dla
+     innych klas.  */
     public WebDriver driver;
 
+    /* Metoda "search" przyjmuje dwa argumenty. Pierwszy z nich to WebElement, a drugi jest typu String
+     o nazwie 'querry'. Metoda "sendKeys" wykonywana na obiekcie element wprowadza do niego wartość obiektu
+     'querry', przekazanego jako argument. */
     public void search(WebElement element, String query) {
         element.sendKeys(query);
-//        element.submit();
     }
 
 
@@ -45,8 +49,10 @@ public class TestBaseClassFrontEnd {
     public void beforeMethod(ITestResult result) {
 
         // Wyświetlam nazwę metody na konsoli
-
         System.out.println("Method name: " + result.getMethod().getMethodName());
+
+        /* Pobieram najnowszą wersję ChromDriver. Następnie tworzę jego nową instancję
+         oraz inicjuję Page Factory dla klasy w której będę ich używać */
 
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
