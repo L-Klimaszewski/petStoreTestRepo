@@ -16,14 +16,6 @@ public class TestBaseClassFrontEnd {
      innych klas.  */
     public WebDriver driver;
 
-    /* Metoda "search" przyjmuje dwa argumenty. Pierwszy z nich to WebElement, a drugi jest typu String
-     o nazwie 'querry'. Metoda "sendKeys" wykonywana na obiekcie element wprowadza do niego wartość obiektu
-     'querry', przekazanego jako argument. */
-    public void search(WebElement element, String query) {
-        element.sendKeys(query);
-    }
-
-
     @BeforeSuite
     public static void getSuiteName(ITestContext context) {
 
@@ -40,10 +32,7 @@ public class TestBaseClassFrontEnd {
 
         String className = this.getClass().getSimpleName();
         System.out.println("Class name: " + className);
-
-
     }
-
 
     @BeforeMethod
     public void beforeMethod(ITestResult result) {
@@ -57,9 +46,7 @@ public class TestBaseClassFrontEnd {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         PageFactory.initElements(driver, this);
-
     }
-
 
     @AfterMethod
     public void afterMethod(ITestResult result) {
@@ -77,8 +64,6 @@ public class TestBaseClassFrontEnd {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        //driver.quit();
     }
 
     @AfterClass
@@ -87,7 +72,6 @@ public class TestBaseClassFrontEnd {
         // Wyświetlam informację o końcu danej klasy.
 
         System.out.println("End of class");
-
     }
 
     @AfterSuite
@@ -96,7 +80,22 @@ public class TestBaseClassFrontEnd {
         // Wyświetlam informację o końcu danego profilu testowego.
 
         System.out.println("End of the suite");
+    }
 
+    public void clickElement (WebElement element){
+
+        // Metoda używana do kliknięcia w element przekazany jako argument.
+
+        element.click();
+    }
+
+
+    public void typeTextIntoInput(WebElement element,String search){
+
+        /* Metoda, która przesyła łancuch znaków przekazany jako drugi argument
+          do obiektu przekazanego jako pierwszy argument. */
+
+        element.sendKeys(search);
     }
 
 }
