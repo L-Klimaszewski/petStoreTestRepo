@@ -9,11 +9,13 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+        /* Główna klasa, po której dziedziczyć będą pozostałe klasy. Zawiera metody oraz zmienne używane w
+         dalszych klasach. */
 
 public class TestBaseClassFrontEnd {
 
-    /* Tworzę zmienną 'driver' typu "WebDriver" z modyfikatorem public, tak aby 'driver' był dostępny dla
-     innych klas.  */
+        /* Tworzę zmienną 'driver' typu "WebDriver" z modyfikatorem public, tak aby 'driver' był dostępny dla
+         innych klas. */
     public WebDriver driver;
 
     @BeforeSuite
@@ -38,6 +40,7 @@ public class TestBaseClassFrontEnd {
     public void beforeMethod(ITestResult result) {
 
         // Wyświetlam nazwę metody na konsoli
+
         System.out.println("Method name: " + result.getMethod().getMethodName());
 
         /* Pobieram najnowszą wersję ChromDriver. Następnie tworzę jego nową instancję
