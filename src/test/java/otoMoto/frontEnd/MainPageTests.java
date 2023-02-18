@@ -2,70 +2,92 @@ package otoMoto.frontEnd;
 
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import otoMoto.TestBaseClassFrontEnd;
+import otoMoto.models.MainPage;
 
 import java.time.Duration;
 
+        /* Klasa testowa "MainPageTests" rozszerza klasę "TestBaseClassFrontEnd" uzyskując dostęp do pól oraz
+        metod w niej zawartych. */
+
 public class MainPageTests extends TestBaseClassFrontEnd {
 
-    @FindBy (xpath = "//*[@id='filter_enum_make']/div/input")
-    private WebElement searchBrandInput;
-    @FindBy (xpath = "//*[@id='filter_float_price:to']/div/input")
-    private WebElement chooseMaxPriceInput;
-    @FindBy (xpath = "//*[@id='filter_float_price:to']/div")
-    private WebElement chooseMaxPriceButton;
-    @FindBy (xpath = "//*[@id='filter_float_price:to']/ul/li[12]")
-    private WebElement chooseMaxPrice;
-
-
     @Test
-    public void testingOtoMotoMainPage(){
+    public void checkIfCarTypeAndPriceChosenCorrectly() {
 
-        // Inicjalizuję nowe obiekty klas, których metod będę używał w teście.
+        /* Tworzę nową instancję klas "WebDriverWait", "SoftAssertions" oraz "Actions", których używam w teście.
+        W konstruktorze obiektu wait przekazuję dwa argumenty. Obiekt driver, który reprezentuje kontrolę nad
+        przeglądarką. Drugim argumentem jest czas oczekiwania w postaci obiektu Duration. Klasy "SoftAssertions"
+        użyję do potwierdzenia czy oczekiwane dane są zgodne z wprowadzonymi. Natomiast klasę "Actions" wykorzystam
+        do interakcji z elementami wyświetlanymi na stronie. */
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         SoftAssertions softly = new SoftAssertions();
         Actions actions = new Actions(driver);
 
-        // Wysyłam żądanie do przeglądarki, aby otworzyła podaną stronę.
-        driver.get("https://otomoto.pl");
+        /* Wykonuję metodę "getToMainPage" na nowo utworzonym obiekcie mainPage klasy "MainPage" aby przenieść się
+         pod adres zdefiniowany w tej metodzie. Dzięki instancji tej klasy mam dostęp do zawartych w niej modelach
+         oraz metodach. */
 
-        // Wyszukuję element na stronie o konkretnym ID, a następnie klikam w niego.
-        driver.findElement(By.id("onetrust-accept-btn-handler")).click();
+        MainPage mainPage = new MainPage(driver);
+        mainPage.getToMainPage();
 
-        // Wykorzystuję metodę "search" do wpisania w polu tekstowym (searchBrandInput) hasła "Opel".
-        search(searchBrandInput,"Opel");
+        /* Oczekuję aż dany element będzie widoczny na stronie przy użyciu metody "until" przyjmującej jako argument
+        metody "ExpectedConditions" określającej konkretny warunek do spełnienia. Po jego spełnieniu, używam metody
+        "clickElement" zdefiniowanej w "TestBaseClassFrontEnd" na  */
 
-        // Używam metody asserThat z klasy "SoftAssertions" do sprawdzenia czy spełnione są określone warunki.
+        wait.until(ExpectedConditions.visibilityOf(mainPage.cookies));
+        mainPage.clickElement(mainPage.cookies);
 
-        softly.assertThat(searchBrandInput.isDisplayed()).isTrue();
-        softly.assertThat(searchBrandInput.getAttribute("value")).contains("Opel");
+        /* Przy pomocy metody "typeTextIntoInput"z klasy "TestBaseClassFrontEnd" wprowadzam konkretne dane w pole
+        tekstowe. Metoda ta przyjmuje za argumenty obiekt typu WebElement, na którym będzie wykonana oraz łańcuch
+        znaków do wprowadzenia. Strona korzysta z sugestii danych wyszukiwania, więc używam metody klasy "Actions"
+        do przeniesienia się na intersujący mnie wynik spośród sugerowanych i klikam w element w celu potwierdzenia
+        wyboru. Następnie korzystając z metody "assertThat" sprawdzam czy wybrane dane są zgodne z oczekiwanymi i
+        wyświetlone w odpowienim elemencie. */
+
+        mainPage.typeTextIntoInput(mainPage.searchBrandInput, "Op");
+        actions.moveToElement(mainPage.chooseCarBrand).click().build().perform();
+        softly.assertThat(mainPage.searchBrandInput.getAttribute("value")).contains("Opel");
+
+        /* Metoda "clickElement" z klasy "TestBaseClassFrontEnd" klika w przycisk rozwijający listę wyboru cen.
+        Używam metody "moveToElement" z klasy Actions" do przeniesienia się na wybrany przeze mnie element reprezenujący
+        interesującą mnie cenę. Następnie w niego klikam aby potwierdzić wybór. Metoda "AssertThat" z klasy
+        "SoftAssertions" sprawdza czy dane wyświetlane w oczekiwanym miejscu są zgodne z wybranymi. */
+
+        mainPage.clickElement(mainPage.chooseMinPriceButton);
+        actions.moveToElement(mainPage.chooseMinPrice).click().build().perform();
+        softly.assertThat(mainPage.chooseMinPriceInput.getAttribute("value")).contains("25 000 PLN");
+
+        /* Wprowadzam dane do pola tekstowego używając metody "typeTextIntoInput" z klasy "TestBaseFrontEnd" na
+        obiekcie mainPage z klasy "MainPage". W argumentach przekazuję obiekt na którym ma być wykonana ta
+        metoda oraz wartość jaka ma być wpisana. Ponieważ podaję dokładną cenę, strona sugeruje nie interesujące
+        mnie wartości. Klikam w wolnym miejscu aby jeszcze nie akceptować formularza wyszukiwania przy pomocy
+        metody "click" z klasy "Actions". Dzięki czemu mogę przy użyciu metody "assertThat" sprawdzić czy wyświetlana
+        wartość zgadza się z wybraną przeze mnie. */
+
+        mainPage.typeTextIntoInput(mainPage.chooseMaxPriceInput, "50 000");
+        actions.click(driver.findElement(By.xpath("//body"))).build().perform();
+        softly.assertThat(mainPage.chooseMaxPriceInput.getAttribute("value")).contains("50 000 PLN");
+
+        /* Klikam w element przekazany jako argument metody "clickElement" z klasy "TestBaseClassFrontEnd"
+        w celu potwierdzenia formularza wyszukiwania. */
+
+        mainPage.clickElement(mainPage.submitButton);
+
+        /* Przy użyciu metody "until" z klasy "WebDriverWait" czekam aż element chosenCarBrand będzie dostępny do
+        kliknięcia.  Spełnienie tego warunku pozwoli mi na dostęp do tego elementu, co umożliwi mi wykorzystanie
+        miękkich asercji. Metodą "assertThat" sprawdzam czy wyświetlone wartości zgadzają się z wybranymi i
+        wprowadzonymi wcześniej.  */
+
+        wait.until(ExpectedConditions.elementToBeClickable(mainPage.chosenCarBrand));
+        softly.assertThat(mainPage.chosenCarBrand.getAttribute("placeholder").contains("Opel")).isTrue();
+        softly.assertThat(mainPage.chosenMinPrice.getAttribute("value").contains("25 000")).isTrue();
+        softly.assertThat(mainPage.chosenMaxPrice.getAttribute("value").contains("50 000")).isTrue();
         softly.assertAll();
-
-        // Klikam przycisk rozwijający listę cen do wyboru.
-        chooseMaxPriceButton.click();
-
-        // Oczekuję aż lista, której adres jest zapisany w zmiennej maxPriceList będzie widoczna.
-
-        By maxPriceList = By.xpath("//*[@id='filter_float_price:to']/ul");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(maxPriceList));
-
-        /* Przy pomocy metody "moveToElement" z klasy "Actions" wybieram konkretną cenę zdefiniowaną jako
-        obiekt chooseMaxPrice, a następnie kliknięciem wybieram ten obiekt. */
-
-        actions.moveToElement(chooseMaxPrice).click().build().perform();
-
-        // Używam asercji aby sprawdzić czy pole tekstowe zawiera tą samą wartość, którą wybrałem wcześniej.
-
-        softly.assertThat(chooseMaxPriceInput.getAttribute("value")).isEqualTo("50 000 PLN");
-        softly.assertAll();
-
     }
-
 }
