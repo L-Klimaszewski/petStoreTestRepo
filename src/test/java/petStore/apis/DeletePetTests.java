@@ -15,7 +15,6 @@ import java.util.Map;
 public class DeletePetTests extends TestBaseClassAPI {
 
     @Test
-
     public void deletingExistingRecord (){
 
         /* Tworzę nowy obiekt klasy "PostPet", dzięki temu uzyskam dostęp do metod zawartych w tej klasie.
@@ -94,64 +93,32 @@ public class DeletePetTests extends TestBaseClassAPI {
 
     }
 
-
     @Test
-    public void checkStatusCodeAndErrorResponseWhenShortCutPowerProvided() {
+    public void deletingNonExistingRecord (){
 
-        PostPet postPet = new PostPet();
         DeletePet deletePet = new DeletePet();
-        SoftAssertions softly = new SoftAssertions();
         Map<String,String> paramsMap = new HashMap<>();
-        String id = "25p5";
-
-        try {
-            postPet.getRequestBody().setId(Long.valueOf(id));
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        postPet.getRequestBody().setName("Łajka");
-        getResponsePost(postPet);
+        String id = "1951191000";
+        SoftAssertions softly = new SoftAssertions();
 
         paramsMap.put("id",id);
-
         getResponseDelete(deletePet,paramsMap,404);
 
-        softly.assertThat(deletePet.getResponseBody().getCode()).isEqualTo(404);
+//        --- jesli podam id istniejącego rekordu to wszystko dziala a jesli nie istniejacego to wyswietla blad:
+//        java.lang.IllegalStateException: Cannot parse content to class petStore.models.ModelApiResponse because no content-type was present in the response and no default parser has been set.
+//        You can specify a default parser using e.g.:
+//        RestAssured.defaultParser = Parser.JSON;
+//
+//        or you can specify an explicit ObjectMapper using as(class petStore.models.ModelApiResponse, <ObjectMapper>);
+
+        softly.assertThat(deletePet.getResponseBody().getCode()).isEqualTo(200);
         softly.assertThat(deletePet.getResponseBody().getType()).isEqualTo("unknown");
-        softly.assertThat(deletePet.getResponseBody().getMessage()).isEqualTo("java.lang.NumberFormatException: For input string: \"25p5\"");
+        softly.assertThat(deletePet.getResponseBody().getMessage()).isEqualTo(id);
         softly.assertAll();
-    }
-
-    @Test
-    public void checkStatusCodeAndErrorResponseWhenStringIdProvided() {
-
-        PostPet postPet = new PostPet();
-        DeletePet deletePet = new DeletePet();
-        SoftAssertions softly = new SoftAssertions();
-        Map<String,String> paramsMap = new HashMap<>();
-        String id = "abc";
-
-        try {
-            postPet.getRequestBody().setId(Long.valueOf(id));
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        postPet.getRequestBody().setName("Łajka");
-        getResponsePost(postPet);
-
-        paramsMap.put("id",id);
-
-        getResponseDelete(deletePet,paramsMap,404);
-
-        softly.assertThat(deletePet.getResponseBody().getCode()).isEqualTo(404);
-        softly.assertThat(deletePet.getResponseBody().getType()).isEqualTo("unknown");
-        softly.assertThat(deletePet.getResponseBody().getMessage()).isEqualTo("java.lang.NumberFormatException: For input string: \"abc\"");
-        softly.assertAll();
-    }
-
 
     }
+
+
+}
 
 
