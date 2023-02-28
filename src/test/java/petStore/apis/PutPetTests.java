@@ -35,5 +35,23 @@ public class PutPetTests extends TestBaseClassAPI {
         softly.assertAll();
     }
 
+    @Test
+    public void checkStatusCodeAndErrorResponseWhenArabicSentenceProvided(){
 
+        PutPet putPet = new PutPet();
+        SoftAssertions softly = new SoftAssertions();
+        long id = 165768L;
+        String name = "يزعجني أنك تشخر.";
+
+        putPet.getRequestBody().setId(id);
+        putPet.getRequestBody().setName(name);
+        getResponsePut(putPet);
+
+        softly.assertThat(putPet.getResponseBody().getId()).isEqualTo(id);
+        softly.assertThat(putPet.getResponseBody().getName()).isEqualTo(name);
+        softly.assertAll();
+    }
+
+     /*  Z mojego punktu widzenia aplikacja działa prawidłowo i bez dokumentacji nie
+       jestem w stanie przeprowadzić dalszych testów.  */
 }
