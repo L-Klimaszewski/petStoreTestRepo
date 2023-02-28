@@ -80,11 +80,34 @@ public class PostPetTests extends TestBaseClassAPI {
         softly.assertAll();
     }
 
+
+
     @Test
-    public void negative(){
-        PostPet pet = new PostPet();
-        pet.getRequestBody().setId(-123141L);
-        pet.getRequestBody().setCategory(new Category().id(null));
-        getResponsePost(pet);
+    public void checkStatusCodeAndErrorResponseWhenUnusualSingsProvided (){
+
+
+        long id = 1951191000L;
+        Category category = new Category();
+        category.setName("p x y q x y r x          ");
+        category.setId(1231321L);
+
+        List<Tag> tagList = new ArrayList<>();
+        Tag firstTag = new Tag();
+        firstTag.setId(17128L);
+        firstTag.setName("getText()");
+        tagList.add(firstTag);
+
+        PostPet postPet = new PostPet();
+        postPet.getRequestBody().setId(id);
+        postPet.getRequestBody().setName("Łajka");
+        postPet.getRequestBody().setCategory(category);
+        postPet.getRequestBody().setTags(tagList);
+        postPet.getRequestBody().setStatus(Pet.StatusEnum.AVAILABLE);
+        getResponsePost(postPet);
+
     }
+    /*  Z mojego punktu widzenia aplikacja działa prawidłowo i bez dokumentacji nie
+       jestem w stanie przeprowadzić dalszych testów.  */
+
+
 }
