@@ -38,13 +38,13 @@ public class MainPage extends TestBaseClassFrontEnd {
     public WebElement chooseMinPrice;
     @FindBy (xpath ="//*[@id='filter_float_price:from']/div/input")
     public WebElement chooseMinPriceInput;
-    @FindBy (xpath = "//*[@id='__next']/div/div/div/main/div[2]/article/fieldset/div/form/div[2]/button[1]")
+    @FindBy (xpath = "//button[contains(text(),'Pokaż')]")
     public WebElement submitButton;
-    @FindBy (xpath = "//*[@id='__next']/div/div/div/div[2]/div[1]/div/form/section/div/div[2]/div/div/input")
+    @FindBy (xpath = "//input[@placeholder='Marka pojazdu']")
     public WebElement chosenCarBrand;
-    @FindBy (xpath = "//*[@id='__next']/div/div/div/div[2]/div[1]/div/form/section/div/div[5]/div/div[1]/div/div/input")
+    @FindBy (xpath = "//input[@placeholder='Cena od']")
     public WebElement chosenMinPrice;
-    @FindBy (xpath = "//*[@id='__next']/div/div/div/div[2]/div[1]/div/form/section/div/div[5]/div/div[2]/div/div/input")
+    @FindBy (xpath = "//input[@placeholder='Cena do']")
     public WebElement chosenMaxPrice;
 
 
