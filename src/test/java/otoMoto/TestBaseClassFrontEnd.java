@@ -100,5 +100,12 @@ public class TestBaseClassFrontEnd {
 
         element.sendKeys(search);
     }
+    public void typeTextIntoInputAndSubmit(WebElement element,String search){
 
+        /* Metoda, która przesyła łancuch znaków przekazany jako drugi argument
+          do obiektu przekazanego jako pierwszy argument. */
+
+        element.sendKeys(search);
+        element.submit();
+    }
 }
