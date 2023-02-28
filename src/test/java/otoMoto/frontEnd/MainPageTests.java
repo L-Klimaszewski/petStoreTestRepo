@@ -84,8 +84,9 @@ public class MainPageTests extends TestBaseClassFrontEnd {
         miękkich asercji. Metodą "assertThat" sprawdzam czy wyświetlone wartości zgadzają się z wybranymi i
         wprowadzonymi wcześniej.  */
 
-        wait.until(ExpectedConditions.elementToBeClickable(mainPage.chosenCarBrand));
-        softly.assertThat(mainPage.chosenCarBrand.getAttribute("placeholder").contains("Opel")).isTrue();
+        wait.until(ExpectedConditions.visibilityOf(mainPage.chosenCarBrand));
+        softly.assertThat(mainPage.chosenCarBrand.getAttribute("value").contains("Opel")).isTrue();
+        wait.until(ExpectedConditions.visibilityOf(mainPage.chosenMinPrice));
         softly.assertThat(mainPage.chosenMinPrice.getAttribute("value").contains("25 000")).isTrue();
         softly.assertThat(mainPage.chosenMaxPrice.getAttribute("value").contains("50 000")).isTrue();
         softly.assertAll();
